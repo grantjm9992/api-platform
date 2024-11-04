@@ -21,3 +21,12 @@ api_platform:
     # change this to true if you use controllers
     use_symfony_listeners: false
     keep_legacy_inflector: false
+
+    mapping:
+        paths:
+            - '%kernel.project_dir%/src/UserManagementContext/Entity'
+            - '%kernel.project_dir%/src/ServiceManagementContext/Entity'
+            - '%kernel.project_dir%/src/BookingContext/Entity'
+            - '%kernel.project_dir%/src/ReviewContext/Entity'
+            - '%kernel.project_dir%/src/NotificationContext/Entity'
+            - '%kernel.project_dir%/src/PaymentContext/Entity'

@@ -8,6 +8,8 @@ doctrine:
 
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
+        types:
+            uuid: App\SharedContext\Doctrine\Type\UuidType
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true
@@ -16,12 +18,42 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
+            App\BookingContext:
                 type: attribute
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+                dir: '%kernel.project_dir%/src/BookingContext/Entity'
+                prefix: 'App\BookingContext\Entity'
+                alias: App\BookingContext
+            App\NotificationContext:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/NotificationContext/Entity'
+                prefix: 'App\NotificationContext\Entity'
+                alias: App\NotificationContext
+            App\PaymentContext:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/PaymentContext/Entity'
+                prefix: 'App\PaymentContext\Entity'
+                alias: App\PaymentContext
+            App\ReviewContext:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/ReviewContext/Entity'
+                prefix: 'App\ReviewContext\Entity'
+                alias: App\ReviewContext
+            App\ServiceManagementContext:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/ServiceManagementContext/Entity'
+                prefix: 'App\ServiceManagementContext\Entity'
+                alias: App\ServiceManagementContext
+            App\UserManagementContext:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/UserManagementContext/Entity'
+                prefix: 'App\UserManagementContext\Entity'
+                alias: App\UserManagementContext
         controller_resolver:
             auto_mapping: true
 
