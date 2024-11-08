@@ -3,6 +3,7 @@
 namespace App\UserManagementContext\Security\Voter;
 
 use App\UserManagementContext\Entity\User;
+use App\UserManagementContext\Enum\Roles;
 use App\UserManagementContext\Security\f;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -51,7 +52,7 @@ final class UserVoter extends Voter
         TokenInterface $token,
         $subject,
     ): bool {
-        if (in_array('ROLE_ADMIN', $token->getRoleNames())) {
+        if (in_array(Roles::ADMIN->value, $token->getRoleNames())) {
             return true;
         }
 
