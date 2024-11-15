@@ -9,7 +9,7 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\UserManagementContext\Controller\User\ResetPasswordAction;
 use App\UserManagementContext\Repository\UserRepository;
-use App\UserManagementContext\State\Processor\CreateUserProcessor;
+use App\UserManagementContext\State\Processor\User\CreateUserProcessor;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;

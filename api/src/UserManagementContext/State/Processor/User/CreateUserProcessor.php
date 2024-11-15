@@ -1,23 +1,19 @@
 <?php
 
-namespace App\UserManagementContext\State\Processor;
+namespace App\UserManagementContext\State\Processor\User;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use ApiPlatform\Validator\ValidatorInterface;
-use App\UserManagementContext\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
+use App\UserManagementContext\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface;
-use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 
 readonly class CreateUserProcessor implements ProcessorInterface
 {
     public function __construct(
-        private EntityManagerInterface $entityManager,
+        private UserRepositoryInterface $userRepository,
         private UserPasswordHasherInterface $passwordEncoder,
         private ValidatorInterface $validator
     ) {
@@ -25,10 +21,8 @@ readonly class CreateUserProcessor implements ProcessorInterface
 
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): JsonResponse
     {
-        // Validate the user entity (optional, depends on your validation strategy)
         $this->validator->validate($data);
 
-        // Hash the password
         $encodedPassword = $this->passwordEncoder->hashPassword(
             $data,
             $data->getPassword(),
@@ -36,11 +30,8 @@ readonly class CreateUserProcessor implements ProcessorInterface
 
         $data->setPassword($encodedPassword);
 
-        // Persist the user to the database
-        $this->entityManager->persist($data);
-        $this->entityManager->flush();
+        $this->userRepository->save($data);
 
-        // Return a response (you can customize this as needed)
         return new JsonResponse(['status' => 'User created!'], Response::HTTP_CREATED);
     }
 }

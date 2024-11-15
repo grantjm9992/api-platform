@@ -16,7 +16,7 @@ class Payment
     #[ORM\Column(type: 'uuid')]
     private UuidInterface $id;
 
-    #[ORM\ManyToOne(targetEntity: Booking::class)] // Assuming Booking is the linked entity
+    #[ORM\ManyToOne(targetEntity: Booking::class)]
     #[ORM\JoinColumn(nullable: false)]
     private Booking $booking;
 
@@ -24,13 +24,13 @@ class Payment
     private float $amount;
 
     #[ORM\Column(type: 'string')]
-    private string $paymentMethod; // e.g., 'credit_card', 'paypal'
+    private string $paymentMethod;
 
     #[ORM\Column(type: 'string')]
-    private string $status; // e.g., 'completed', 'pending', 'failed'
+    private string $status;
 
     #[ORM\Column(type: 'string')]
-    private string $transactionId; // Unique identifier for the payment transaction
+    private string $transactionId;
 
     #[ORM\Column(type: 'datetime')]
     private \DateTimeInterface $createdAt;
